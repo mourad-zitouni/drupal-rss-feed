@@ -1,0 +1,8 @@
+name: 'Latest Articles'
+type: module
+description: 'Display the latest articles.'
+core_version_requirement: ^9 || ^10
+package: Custom
+dependencies:
+  - drupal:block
+  - node:node
