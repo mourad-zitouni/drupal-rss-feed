@@ -1,0 +1,112 @@
+uuid: d0ebfee7-d731-438b-af3f-15441e5a0b77
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.article.body
+    - field.field.node.article.field_tags
+    - node.type.article
+  module:
+    - feeds_log
+    - feeds_tamper
+    - node
+third_party_settings:
+  feeds_log:
+    status: true
+    operations:
+      created: created
+      updated: updated
+      deleted: deleted
+      skipped: skipped
+      failed: failed
+      cleaned: cleaned
+    items:
+      created: created
+      updated: updated
+      deleted: deleted
+      skipped: skipped
+      failed: failed
+    source: true
+  feeds_tamper:
+    tampers:
+      876958ab-507a-47ab-96a6-c822651a7da8:
+        to_from: to
+        copy_source: tag_from_title
+        uuid: 876958ab-507a-47ab-96a6-c822651a7da8
+        plugin: copy
+        source: title
+        weight: 0
+        label: Copy
+      44d90d91-2c61-4ff4-ba45-5a8dfd7ce45b:
+        find: '/:.*$/'
+        replace: ''
+        limit: null
+        uuid: 44d90d91-2c61-4ff4-ba45-5a8dfd7ce45b
+        plugin: find_replace_regex
+        source: tag_from_title
+        weight: 0
+        label: 'Find replace REGEX'
+label: 'Planet rss feed'
+id: planet_rss_feed
+description: ''
+help: ''
+import_period: 86400
+fetcher: http
+fetcher_configuration:
+  auto_detect_feeds: false
+  use_pubsubhubbub: false
+  always_download: false
+  fallback_hub: ''
+  request_timeout: 30
+parser: syndication
+parser_configuration: {  }
+processor: 'entity:node'
+processor_configuration:
+  values:
+    type: article
+  langcode: en
+  insert_new: 1
+  update_existing: 0
+  update_non_existent: _keep
+  skip_hash_check: false
+  authorize: true
+  revision: false
+  expire: -1
+  owner_feed_author: false
+  owner_id: 0
+custom_sources:
+  pubdate:
+    value: pubDate
+    label: pubDate
+    machine_name: pubdate
+    type: blank
+  tag_from_title:
+    value: 'tag from title'
+    label: 'tag from title'
+    machine_name: tag_from_title
+    type: blank
+mappings:
+  -
+    target: title
+    map:
+      value: title
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: body
+    map:
+      value: description
+      summary: ''
+    settings:
+      language: ''
+      format: full_html
+  -
+    target: field_tags
+    map:
+      target_id: tag_from_title
+    settings:
+      language: ''
+      reference_by: name
+      autocreate: 1
+      autocreate_bundle: tags

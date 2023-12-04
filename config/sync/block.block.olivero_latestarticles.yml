@@ -1,0 +1,22 @@
+uuid: 08760556-2941-4c09-b223-bc4fee65d4b5
+langcode: en
+status: true
+dependencies:
+  module:
+    - latest_articles
+  theme:
+    - olivero
+id: olivero_latestarticles
+theme: olivero
+region: content
+weight: -6
+provider: null
+plugin: latest_articles_block
+settings:
+  id: latest_articles_block
+  label: 'Latest Articles'
+  label_display: visible
+  provider: latest_articles
+  num_articles: '5'
+  cache_lifetime: '3600'
+visibility: {  }
