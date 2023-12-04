@@ -13,6 +13,7 @@
 
 * To add import cron:
 crontab -e
+
 0 6 * * * /path/to/project/folder/drupal-rss-feed/scripts/import.sh
 
 
